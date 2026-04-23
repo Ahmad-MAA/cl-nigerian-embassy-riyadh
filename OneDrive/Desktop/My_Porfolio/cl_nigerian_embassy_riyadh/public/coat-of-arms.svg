@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Stylised placeholder rendering of the Coat of Arms of the Federal
+  Republic of Nigeria. Captures the most recognisable elements: black
+  shield with the white "Y" representing the Niger and Benue rivers, a
+  simplified red eagle above, and the green motto banner below.
+
+  Replace this file with the official high-resolution artwork before
+  going to production.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="Coat of Arms of the Federal Republic of Nigeria">
+  <title>Coat of Arms of the Federal Republic of Nigeria</title>
+
+  <!-- Outer white disc with green border -->
+  <circle cx="120" cy="120" r="116" fill="#ffffff" stroke="#006400" stroke-width="4"/>
+  <circle cx="120" cy="120" r="108" fill="none" stroke="#006400" stroke-width="1"/>
+
+  <!-- Eagle (simplified silhouette) -->
+  <g fill="#b91c1c">
+    <ellipse cx="120" cy="58" rx="7" ry="11"/>
+    <circle cx="120" cy="46" r="5"/>
+    <path d="M120 46 L113 49 L120 51 Z"/>
+    <path d="M120 54 Q92 52 80 70 Q98 62 120 64 Z"/>
+    <path d="M120 54 Q148 52 160 70 Q142 62 120 64 Z"/>
+    <path d="M115 68 L120 78 L125 68 Z"/>
+  </g>
+
+  <!-- Shield -->
+  <path d="M65 84 L175 84 L175 144 Q175 184 120 198 Q65 184 65 144 Z" fill="#000000"/>
+
+  <!-- White Y-shape (Niger & Benue rivers) -->
+  <g stroke="#ffffff" stroke-width="11" fill="none" stroke-linecap="square">
+    <line x1="85" y1="104" x2="120" y2="138"/>
+    <line x1="155" y1="104" x2="120" y2="138"/>
+    <line x1="120" y1="138" x2="120" y2="174"/>
+  </g>
+
+  <!-- Motto banner -->
+  <g>
+    <rect x="30" y="206" width="180" height="22" rx="2" fill="#006400"/>
+    <text x="120" y="221" font-family="Georgia, 'Times New Roman', serif" font-size="9" font-weight="bold" text-anchor="middle" fill="#ffffff" letter-spacing="1.6">UNITY AND FAITH, PEACE AND PROGRESS</text>
+  </g>
+</svg>

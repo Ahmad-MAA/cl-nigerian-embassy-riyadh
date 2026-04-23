@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "PowerShell(npx tsc --noEmit 2>&1)",
+      "Bash(npx eslint *)",
+      "Bash(npx.cmd eslint *)",
+      "PowerShell(npx eslint app; \"exit=$LASTEXITCODE\")",
+      "PowerShell(python -c \"from PIL import Image; print\\(Image.__version__\\)\" 2>&1; \"exit=$LASTEXITCODE\")",
+      "PowerShell(python -m pip install --quiet Pillow 2>&1 | Select-Object -Last 3; \"exit=$LASTEXITCODE\")",
+      "PowerShell(python -c \"from PIL import Image; im = Image.open\\(r'C:\\\\Users\\\\AHMAD\\\\OneDrive\\\\Desktop\\\\My_Porfolio\\\\cl_nigerian_embassy_riyadh\\\\public\\\\images\\\\map_nig.png'\\); print\\(im.mode, im.size\\); print\\('corners:', im.getpixel\\(\\(0,0\\)\\), im.getpixel\\(\\(im.size[0]-1,0\\)\\), im.getpixel\\(\\(0,im.size[1]-1\\)\\), im.getpixel\\(\\(im.size[0]-1,im.size[1]-1\\)\\)\\)\")",
+      "PowerShell(npx eslint app/useful-links app/components/Footer.tsx app/sitemap)"
+    ]
+  }
+}
