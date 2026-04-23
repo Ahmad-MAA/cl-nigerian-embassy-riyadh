@@ -40,7 +40,7 @@ postcss.config.mjs          # PostCSS configuration
 
 1. **Navigate to the project directory** (if not already there):
    ```bash
-   cd vs_nigerian_embassy_riyadh
+   cd cl_nigerian_embassy_riyadh
    ```
 
 2. **Install dependencies** (already done, but for reference):

@@ -9,7 +9,7 @@ Your Next.js 14 project has been successfully scaffolded with App Router, Tailwi
 ## 📂 Folder Structure
 
 ```
-vs_nigerian_embassy_riyadh/
+cl_nigerian_embassy_riyadh/
 ├── app/
 │   ├── components/
 │   │   ├── Header.tsx          ✨ Responsive sticky header

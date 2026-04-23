@@ -97,7 +97,7 @@ Body: text-base md:text-lg             (Content)
 ## 📁 UPDATED PROJECT STRUCTURE
 
 ```
-📦 vs_nigerian_embassy_riyadh/
+📦 cl_nigerian_embassy_riyadh/
 │
 ├── 📂 app/
 │   ├── 📂 components/

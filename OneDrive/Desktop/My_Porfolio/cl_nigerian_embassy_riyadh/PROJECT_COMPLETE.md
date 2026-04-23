@@ -17,7 +17,7 @@ Your Next.js 14 application is now running and ready for development!
 ## 📁 Complete Folder Structure
 
 ```
-vs_nigerian_embassy_riyadh/
+cl_nigerian_embassy_riyadh/
 │
 ├── app/                           # App Router directory
 │   ├── components/
