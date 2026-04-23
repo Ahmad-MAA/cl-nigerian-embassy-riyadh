@@ -42,9 +42,10 @@ export default function ContactPage() {
             >
               <address className="not-italic leading-relaxed">
                 Embassy of the Federal Republic of Nigeria<br />
-                Diplomatic Quarter<br />
-                Riyadh 11693<br />
-                Kingdom of Saudi Arabia
+                Abubakar Al-Razi Square<br />
+                Abdullah bin Huzafah Al-Sahami Road<br />
+                Diplomatic Quarters<br />
+                Riyadh, Saudi Arabia
               </address>
             </a>
             <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">

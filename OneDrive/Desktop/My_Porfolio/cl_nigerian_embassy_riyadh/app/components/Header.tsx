@@ -45,13 +45,13 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Desktop search — sits to the left, grows up to a comfortable cap */}
-        <div className="hidden lg:block flex-1 min-w-[17rem] max-w-md">
-          <SearchBar />
-        </div>
-
         <div className="ms-auto">
           <Navbar />
+        </div>
+
+        {/* Desktop search — sits after the nav at the end of the row */}
+        <div className="hidden lg:block w-72 xl:w-80">
+          <SearchBar />
         </div>
       </div>
 

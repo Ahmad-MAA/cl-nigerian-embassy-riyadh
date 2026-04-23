@@ -280,7 +280,7 @@ export default function Home() {
               </ContactIcon>
               <div>
                 <p className="font-semibold text-gray-900 dark:text-white">Address</p>
-                <p>Diplomatic Quarter, Riyadh 11693, Kingdom of Saudi Arabia</p>
+                <p>Abubakar Al-Razi Square, Abdullah bin Huzafah Al-Sahami Road, Diplomatic Quarters, Riyadh, Saudi Arabia</p>
               </div>
             </li>
             <li className="flex items-start gap-3">
