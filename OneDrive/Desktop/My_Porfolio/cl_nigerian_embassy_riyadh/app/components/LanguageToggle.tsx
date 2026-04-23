@@ -1,53 +1,19 @@
 'use client';
 
-import { useEffect, useSyncExternalStore } from 'react';
+import { useEffect } from 'react';
+import { setLang, useLang } from '../i18n/useT';
 
-type Lang = 'en' | 'ar';
-const STORAGE_KEY = 'embassy-site-lang';
-const CHANGE_EVENT = 'embassy-site-lang-change';
-
-function readStored(): Lang {
-  try {
-    const stored = window.localStorage.getItem(STORAGE_KEY);
-    return stored === 'ar' || stored === 'en' ? stored : 'en';
-  } catch {
-    return 'en';
-  }
-}
-
-function subscribe(callback: () => void) {
-  window.addEventListener(CHANGE_EVENT, callback);
-  window.addEventListener('storage', callback);
-  return () => {
-    window.removeEventListener(CHANGE_EVENT, callback);
-    window.removeEventListener('storage', callback);
-  };
-}
-
-function getServerSnapshot(): Lang {
-  return 'en';
-}
-
-function applyLang(lang: Lang) {
+function applyLang(lang: 'en' | 'ar') {
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 }
 
 export default function LanguageToggle() {
-  const lang = useSyncExternalStore(subscribe, readStored, getServerSnapshot);
+  const lang = useLang();
 
   useEffect(() => {
     applyLang(lang);
   }, [lang]);
-
-  const choose = (next: Lang) => {
-    try {
-      window.localStorage.setItem(STORAGE_KEY, next);
-    } catch {
-      /* localStorage unavailable — silently ignore */
-    }
-    window.dispatchEvent(new Event(CHANGE_EVENT));
-  };
 
   return (
     <div
@@ -57,7 +23,7 @@ export default function LanguageToggle() {
     >
       <button
         type="button"
-        onClick={() => choose('en')}
+        onClick={() => setLang('en')}
         aria-pressed={lang === 'en'}
         lang="en"
         className={`px-3 py-1 font-semibold transition ${
@@ -70,7 +36,7 @@ export default function LanguageToggle() {
       </button>
       <button
         type="button"
-        onClick={() => choose('ar')}
+        onClick={() => setLang('ar')}
         aria-pressed={lang === 'ar'}
         lang="ar"
         className={`px-3 py-1 font-semibold transition ${

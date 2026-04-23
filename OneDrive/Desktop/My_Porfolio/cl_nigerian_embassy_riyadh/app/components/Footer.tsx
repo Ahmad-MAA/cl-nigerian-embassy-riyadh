@@ -1,28 +1,8 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-
-// Mirrors the structure used by Navbar.tsx so footer + header stay in sync.
-const QUICK_LINKS = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  { label: 'News', href: '/news' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'FAQ', href: '/faq' },
-  { label: 'Useful Links', href: '/useful-links' },
-];
-
-const SERVICE_LINKS = [
-  { label: 'Visa', href: '/services/visa' },
-  { label: 'Passport', href: '/services/passport' },
-  { label: 'Emergency Travel', href: '/services/emergency-travel' },
-];
-
-const LEGAL_LINKS = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of Use', href: '/terms' },
-  { label: 'Sitemap', href: '/sitemap' },
-  { label: 'Accessibility', href: '/accessibility' },
-];
+import { useT } from '../i18n/useT';
 
 function Icon({ children }: { children: React.ReactNode }) {
   return (
@@ -39,6 +19,30 @@ function Icon({ children }: { children: React.ReactNode }) {
 }
 
 export default function Footer() {
+  const t = useT();
+
+  const QUICK_LINKS = [
+    { label: t.nav.items.home, href: '/' },
+    { label: t.nav.items.about, href: '/about' },
+    { label: t.nav.items.news, href: '/news' },
+    { label: t.nav.items.contact, href: '/contact' },
+    { label: t.nav.items.faq, href: '/faq' },
+    { label: t.footer.usefulLinks, href: '/useful-links' },
+  ];
+
+  const SERVICE_LINKS = [
+    { label: t.nav.items.visa, href: '/services/visa' },
+    { label: t.nav.items.passport, href: '/services/passport' },
+    { label: t.nav.items.emergencyTravel, href: '/services/emergency-travel' },
+  ];
+
+  const LEGAL_LINKS = [
+    { label: t.footer.privacy, href: '/privacy' },
+    { label: t.footer.terms, href: '/terms' },
+    { label: t.footer.sitemap, href: '/sitemap' },
+    { label: t.footer.accessibility, href: '/accessibility' },
+  ];
+
   return (
     <footer className="w-full bg-gray-900 text-gray-100 mt-auto border-t-4 border-green-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -55,21 +59,18 @@ export default function Footer() {
               />
               <div>
                 <h3 className="text-base font-semibold text-white leading-snug">
-                  Embassy of the Federal Republic of Nigeria
+                  {t.footer.embassyName}
                 </h3>
-                <p className="text-sm text-green-400 font-semibold">Riyadh, Saudi Arabia</p>
+                <p className="text-sm text-green-400 font-semibold">{t.footer.country}</p>
               </div>
             </div>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              The official website of the Embassy. For visa, passport and consular enquiries,
-              please contact us directly.
-            </p>
+            <p className="text-sm text-gray-300 leading-relaxed">{t.footer.description}</p>
           </div>
 
           {/* Quick Links */}
-          <nav aria-label="Quick links">
+          <nav aria-label={t.footer.quickLinks}>
             <h3 className="text-sm font-semibold uppercase tracking-wide text-white mb-4">
-              Quick Links
+              {t.footer.quickLinks}
             </h3>
             <ul className="space-y-2">
               {QUICK_LINKS.map((link) => (
@@ -86,9 +87,9 @@ export default function Footer() {
           </nav>
 
           {/* Services */}
-          <nav aria-label="Services">
+          <nav aria-label={t.footer.services}>
             <h3 className="text-sm font-semibold uppercase tracking-wide text-white mb-4">
-              Services
+              {t.footer.services}
             </h3>
             <ul className="space-y-2">
               {SERVICE_LINKS.map((link) => (
@@ -107,7 +108,7 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-wide text-white mb-4">
-              Contact
+              {t.footer.contact}
             </h3>
             <ul className="space-y-3 text-sm text-gray-300">
               <li className="group">
@@ -122,9 +123,7 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="hover:text-green-400 focus:outline-none focus-visible:text-green-400 focus-visible:underline"
                   >
-                    <address className="not-italic">
-                      Abubakar Al-Razi Square, Abdullah bin Huzafah Al-Sahami Road, Diplomatic Quarters, Riyadh, Saudi Arabia
-                    </address>
+                    <address className="not-italic">{t.footer.address}</address>
                   </a>
                 </div>
                 <div
@@ -148,7 +147,7 @@ export default function Footer() {
                 <Icon>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.95.68l1.5 4.49a1 1 0 01-.5 1.21l-2.26 1.13a11 11 0 005.5 5.5l1.13-2.26a1 1 0 011.21-.5l4.49 1.5a1 1 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/>
                 </Icon>
-                <a href="tel:+966114823000" className="hover:text-green-400">
+                <a href="tel:+966114823000" className="hover:text-green-400" dir="ltr">
                   +966 (0) 11 482 3000
                 </a>
               </li>
@@ -159,6 +158,7 @@ export default function Footer() {
                 <a
                   href="mailto:info@nigerianembassyriyadh.gov.ng"
                   className="hover:text-green-400 break-all"
+                  dir="ltr"
                 >
                   info@nigerianembassyriyadh.gov.ng
                 </a>
@@ -167,7 +167,7 @@ export default function Footer() {
                 <Icon>
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l2.5 2.5M12 21a9 9 0 110-18 9 9 0 010 18z"/>
                 </Icon>
-                <span>Sun – Thu, 09:00 – 16:00 (Riyadh)</span>
+                <span>{t.footer.hours}</span>
               </li>
             </ul>
           </div>
@@ -175,9 +175,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-gray-700 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-400 text-center md:text-left">
-            &copy; 2026 Embassy of the Federal Republic of Nigeria, Riyadh, Saudi Arabia. All rights reserved.
-          </p>
+          <p className="text-sm text-gray-400 text-center md:text-start">{t.footer.copyright}</p>
           <ul className="flex flex-wrap justify-center md:justify-end items-center gap-x-4 gap-y-2 text-sm">
             {LEGAL_LINKS.map((link, i) => (
               <li key={link.href} className="flex items-center gap-4">

@@ -1,31 +1,36 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useT } from '../i18n/useT';
 
 type NavLeaf = { label: string; href: string };
 type NavItem = NavLeaf | { label: string; submenu: NavLeaf[] };
-
-const NAV_ITEMS: NavItem[] = [
-  { label: 'Home', href: '/' },
-  { label: 'About', href: '/about' },
-  {
-    label: 'Services',
-    submenu: [
-      { label: 'Visa', href: '/services/visa' },
-      { label: 'Passport', href: '/services/passport' },
-      { label: 'Emergency Travel', href: '/services/emergency-travel' },
-    ],
-  },
-  { label: 'News', href: '/news' },
-  { label: 'Contact', href: '/contact' },
-  { label: 'FAQ', href: '/faq' },
-];
 
 const hasSubmenu = (item: NavItem): item is { label: string; submenu: NavLeaf[] } =>
   'submenu' in item;
 
 export default function Navbar() {
+  const t = useT();
+  const NAV_ITEMS: NavItem[] = useMemo(
+    () => [
+      { label: t.nav.items.home, href: '/' },
+      { label: t.nav.items.about, href: '/about' },
+      {
+        label: t.nav.items.services,
+        submenu: [
+          { label: t.nav.items.visa, href: '/services/visa' },
+          { label: t.nav.items.passport, href: '/services/passport' },
+          { label: t.nav.items.emergencyTravel, href: '/services/emergency-travel' },
+        ],
+      },
+      { label: t.nav.items.news, href: '/news' },
+      { label: t.nav.items.contact, href: '/contact' },
+      { label: t.nav.items.faq, href: '/faq' },
+    ],
+    [t],
+  );
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [openMobileSubmenu, setOpenMobileSubmenu] = useState<string | null>(null);
@@ -98,7 +103,7 @@ export default function Navbar() {
   return (
     <div ref={navRef} className="w-full">
       {/* Desktop navigation */}
-      <ul className="hidden md:flex items-center gap-1" role="menubar" aria-label="Primary">
+      <ul className="hidden md:flex items-center gap-1" role="menubar" aria-label={t.nav.primary}>
         {NAV_ITEMS.map((item) => {
           if (!hasSubmenu(item)) {
             return (
@@ -158,7 +163,7 @@ export default function Navbar() {
                 id={panelId}
                 role="menu"
                 aria-label={item.label}
-                className={`absolute left-0 top-full mt-1 min-w-[12rem] bg-white dark:bg-gray-900 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 ${
+                className={`absolute start-0 top-full mt-1 min-w-[12rem] bg-white dark:bg-gray-900 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 py-1 z-50 ${
                   isOpen ? 'block' : 'hidden'
                 }`}
               >
@@ -191,7 +196,7 @@ export default function Navbar() {
         onClick={() => setMobileOpen((v) => !v)}
         aria-expanded={mobileOpen}
         aria-controls="mobile-navigation"
-        aria-label={mobileOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-label={mobileOpen ? t.nav.mobileClose : t.nav.mobileOpen}
         className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950"
       >
         <svg className="h-6 w-6" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,7 +215,7 @@ export default function Navbar() {
         hidden={!mobileOpen}
         className="md:hidden absolute left-0 right-0 top-full bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 shadow-lg max-h-[calc(100vh-4rem)] overflow-y-auto z-40"
       >
-        <ul className="px-2 py-3 space-y-1" role="menu" aria-label="Primary mobile">
+        <ul className="px-2 py-3 space-y-1" role="menu" aria-label={t.nav.primaryMobile}>
           {NAV_ITEMS.map((item) => {
             if (!hasSubmenu(item)) {
               return (
@@ -255,7 +260,7 @@ export default function Navbar() {
                   role="menu"
                   aria-label={item.label}
                   hidden={!isSubOpen}
-                  className="mt-1 ml-3 border-l border-gray-200 dark:border-gray-700 pl-3 space-y-1"
+                  className="mt-1 ms-3 border-s border-gray-200 dark:border-gray-700 ps-3 space-y-1"
                 >
                   {item.submenu.map((sub) => (
                     <li key={sub.label} role="none">

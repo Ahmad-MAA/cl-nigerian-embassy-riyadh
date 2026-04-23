@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
+import { useT } from '../i18n/useT';
 import { searchSite, type SearchDoc } from './searchIndex';
 
 export default function SearchBar() {
+  const t = useT();
   const id = useId();
   const [query, setQuery] = useState('');
   const [open, setOpen] = useState(false);
@@ -62,7 +64,7 @@ export default function SearchBar() {
   return (
     <div ref={containerRef} className="relative w-full">
       <label htmlFor={`${id}-input`} className="sr-only">
-        Search the website
+        {t.header.searchLabel}
       </label>
       <div className="relative">
         <svg
@@ -85,7 +87,7 @@ export default function SearchBar() {
           type="search"
           inputMode="search"
           autoComplete="off"
-          placeholder="Search the site…"
+          placeholder={t.header.searchPlaceholder}
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
