@@ -60,13 +60,13 @@ export default function SearchBar() {
   const listboxId = `${id}-listbox`;
 
   return (
-    <div ref={containerRef} className="relative w-full max-w-xs">
+    <div ref={containerRef} className="relative w-full">
       <label htmlFor={`${id}-input`} className="sr-only">
         Search the website
       </label>
       <div className="relative">
         <svg
-          className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400"
+          className="pointer-events-none absolute start-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500 dark:text-gray-400"
           aria-hidden="true"
           fill="none"
           stroke="currentColor"
@@ -101,7 +101,7 @@ export default function SearchBar() {
           aria-activedescendant={
             activeIndex >= 0 ? `${id}-opt-${activeIndex}` : undefined
           }
-          className="w-full pl-8 pr-3 py-1.5 text-sm rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700"
+          className="block w-full min-h-[40px] ps-10 pe-3 py-2 text-sm sm:text-base rounded-md border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 text-gray-900 dark:text-white placeholder-gray-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-700"
         />
       </div>
 
