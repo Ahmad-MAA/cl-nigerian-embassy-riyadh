@@ -1,38 +1,52 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useSyncExternalStore } from 'react';
 
 type Lang = 'en' | 'ar';
 const STORAGE_KEY = 'embassy-site-lang';
+const CHANGE_EVENT = 'embassy-site-lang-change';
+
+function readStored(): Lang {
+  try {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    return stored === 'ar' || stored === 'en' ? stored : 'en';
+  } catch {
+    return 'en';
+  }
+}
+
+function subscribe(callback: () => void) {
+  window.addEventListener(CHANGE_EVENT, callback);
+  window.addEventListener('storage', callback);
+  return () => {
+    window.removeEventListener(CHANGE_EVENT, callback);
+    window.removeEventListener('storage', callback);
+  };
+}
+
+function getServerSnapshot(): Lang {
+  return 'en';
+}
 
 function applyLang(lang: Lang) {
-  if (typeof document === 'undefined') return;
   document.documentElement.lang = lang;
   document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
 }
 
 export default function LanguageToggle() {
-  const [lang, setLang] = useState<Lang>('en');
-  const [mounted, setMounted] = useState(false);
+  const lang = useSyncExternalStore(subscribe, readStored, getServerSnapshot);
 
   useEffect(() => {
-    const stored = (typeof window !== 'undefined' && window.localStorage.getItem(STORAGE_KEY)) as
-      | Lang
-      | null;
-    const initial: Lang = stored === 'ar' || stored === 'en' ? stored : 'en';
-    setLang(initial);
-    applyLang(initial);
-    setMounted(true);
-  }, []);
+    applyLang(lang);
+  }, [lang]);
 
   const choose = (next: Lang) => {
-    setLang(next);
-    applyLang(next);
     try {
       window.localStorage.setItem(STORAGE_KEY, next);
     } catch {
       /* localStorage unavailable — silently ignore */
     }
+    window.dispatchEvent(new Event(CHANGE_EVENT));
   };
 
   return (
@@ -44,10 +58,10 @@ export default function LanguageToggle() {
       <button
         type="button"
         onClick={() => choose('en')}
-        aria-pressed={mounted && lang === 'en'}
+        aria-pressed={lang === 'en'}
         lang="en"
         className={`px-3 py-1 font-semibold transition ${
-          mounted && lang === 'en'
+          lang === 'en'
             ? 'bg-white text-green-800'
             : 'text-white hover:bg-white/20 focus-visible:bg-white/20'
         } focus:outline-none focus-visible:ring-2 focus-visible:ring-white`}
@@ -57,10 +71,10 @@ export default function LanguageToggle() {
       <button
         type="button"
         onClick={() => choose('ar')}
-        aria-pressed={mounted && lang === 'ar'}
+        aria-pressed={lang === 'ar'}
         lang="ar"
         className={`px-3 py-1 font-semibold transition ${
-          mounted && lang === 'ar'
+          lang === 'ar'
             ? 'bg-white text-green-800'
             : 'text-white hover:bg-white/20 focus-visible:bg-white/20'
         } focus:outline-none focus-visible:ring-2 focus-visible:ring-white`}
